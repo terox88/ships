@@ -93,7 +93,6 @@ public class OpponentSimulator {
                     for (String temp : tempList) {
                         helpList.add(temp);
                         ship.addCoordinates(temp);
-                        computerPlayer.changeBoard(temp, ship.getName());
                     }
                     tempList.clear();
                     correct = true;
