@@ -12,6 +12,12 @@ public class OpponentSimulatorTestSuite {
         }
     }
     @Test
+    void computerBoardTest() {
+        OpponentSimulator simulator = new OpponentSimulator();
+        Player player = simulator.getBoardForComputer();
+        BoardPrinter.printBoard(player);
+    }
+    @Test
     void movesSimulatorColumnMinusTest() {
         //Given
         OpponentSimulator simulator = new OpponentSimulator();

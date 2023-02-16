@@ -47,7 +47,7 @@ public class TheGame {
                     if (drawn) player1.removeShip(ship);
                     break;
                 } else {
-                    if(player2.getMoveList().contains(shoot)) player2.changeBoard(shoot, "<MISS>");
+                    if(!player2.getMoveList().contains(shoot)) player2.changeBoard(shoot, "<MISS>");
                     if(player2.getMoveList().contains(shoot)) return outcome = 4;
                 }
             }

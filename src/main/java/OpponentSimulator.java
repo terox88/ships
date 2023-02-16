@@ -51,13 +51,13 @@ public class OpponentSimulator {
             while (!correct) {
 
                 boolean newMove = false;
-                String coord0 = charList.get(generator.nextInt(10 - ship.getSize())) + "" + generator.nextInt(1, 12 - ship.getSize());
+                String coord0 = charList.get(generator.nextInt(11 - ship.getSize())) + "" + generator.nextInt(1, 12 - ship.getSize());
                 while (!newMove) {
                     if (!helpList.contains(coord0) && !helper.neighborCheck(coord0, helpList)) {
                         newMove = true;
 
                     } else {
-                        coord0 = charList.get(generator.nextInt(9 - ship.getSize())) + "" + generator.nextInt(1, 11 - ship.getSize());
+                        coord0 = charList.get(generator.nextInt(11 - ship.getSize())) + "" + generator.nextInt(1, 12 - ship.getSize());
                     }
                 }
                 int coord0Column = charList.indexOf(coord0.charAt(0));
@@ -93,6 +93,7 @@ public class OpponentSimulator {
                     for (String temp : tempList) {
                         helpList.add(temp);
                         ship.addCoordinates(temp);
+                        computerPlayer.changeBoard(temp, ship.getName());
                     }
                     tempList.clear();
                     correct = true;
