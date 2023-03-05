@@ -1,20 +1,22 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class OpponentSimulator {
+public class OpponentSimulator implements Serializable {
+    private static final long serialVersionUID = 2L;
     private GameHelper helper;
-    private Random generator;
     private List<String> movesList;
+    private List<String> hitList;
     private List<Character> charList;
     private boolean hit;
     private boolean drawn;
 
     public OpponentSimulator() {
         helper = new GameHelper();
-        generator = new Random();
         movesList = new ArrayList<>();
-        charList = new GameHelper().getCharList();
+        hitList = new ArrayList<>();
+        charList = helper.getCharList();
 
     }
 
@@ -27,6 +29,7 @@ public class OpponentSimulator {
     }
 
     public String shoot() {
+        Random generator = new Random();
         boolean fire = false;
         String shoot ="";
         while (!fire) {
@@ -43,6 +46,7 @@ public class OpponentSimulator {
         Player computerPlayer = new Player("Computer");
         List<String> tempList = new ArrayList<>();
         List<String> helpList = new ArrayList<>();
+        Random generator = new Random();
 
 
         for (Ship ship : computerPlayer.getShipList()) {
@@ -109,35 +113,35 @@ public class OpponentSimulator {
         }
         int column = 0;
         int row = 0;
-        if (hit) {
-            column = charList.indexOf(movesList.get(movesList.size() - 1).charAt(0));
-            row = Integer.parseInt(movesList.get(movesList.size() - 1).substring(1));
+        if (!hitList.isEmpty()) {
+            column = charList.indexOf(hitList.get(hitList.size() - 1).charAt(0));
+            row = Integer.parseInt(hitList.get(hitList.size() - 1).substring(1));
         }
 
         String move = "";
 
-        if (column > 0 && hit) {
+        if (column > 0 && !hitList.isEmpty() ) {
             move = charList.get(column - 1) + "" + row;
             if (!movesList.contains(move)) {
                 movesList.add(move);
                 return move;
             }
         }
-        if (column < 9 && hit) {
+        if (column < 9 && !hitList.isEmpty()) {
             move = charList.get(column + 1) + "" + row;
             if (!movesList.contains(move)) {
                 movesList.add(move);
                 return move;
             }
         }
-        if (row > 1 && hit) {
+        if (row > 1 && !hitList.isEmpty()) {
             move = charList.get(column) + "" + (row - 1);
             if (!movesList.contains(move)) {
                 movesList.add(move);
                 return move;
             }
         }
-        if (row < 10 && hit) {
+        if (row < 10 && !hitList.isEmpty()) {
             move = charList.get(column) + "" + (row + 1);
             if (!movesList.contains(move)) {
                 movesList.add(move);
@@ -159,6 +163,7 @@ public class OpponentSimulator {
         switch (outcome) {
             case 1:// Hit
                 hit = true;
+                hitList.add(movesList.get(movesList.size()-1));
                 break;
             case 2: //Hit and drawn
                 hit = true;

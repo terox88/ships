@@ -1,10 +1,12 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameSetter {
+public class GameSetter implements Serializable {
 
     private GameHelper helper;
     private ConsoleHandler handler;
+    private static final long serialVersionUID = 4L;
 
 
     public GameSetter() {
@@ -33,7 +35,6 @@ public class GameSetter {
 
     public Player setGameForPerson() {
 
-        System.out.println("Enter you name");
         String name = handler.getName();
         Player player = new Player(name);
         List<String> moveList = new ArrayList<>();
@@ -42,7 +43,7 @@ public class GameSetter {
             boolean isCorrect = false;
             List<String> tempList = new ArrayList<>();
             while (!isCorrect) {
-                BoardPrinter.printBoard(player);
+                ConsoleHandler.printBoard(player);
                 System.out.println("Enter " + ship.getSize() + " coordinates for you ship");
                 while (tempList.size() < ship.getSize()) {
 

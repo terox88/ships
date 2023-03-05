@@ -1,7 +1,12 @@
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.*;
 
-public class GameHelper {
+public class GameHelper implements Serializable {
     private List<Character> charList;
+    private static final long serialVersionUID = 3L;
 
     public GameHelper() {
         charList = new ArrayList<>();
@@ -75,5 +80,13 @@ public class GameHelper {
         } else { result = 10;}
 
         return result == (tempCoordinate.size() -1);
+    }
+    public void saveGame(Player player1, Player player2, OpponentSimulator simulator) throws IOException {
+        try(ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("SAVE_GAME.data"))) {
+            output.writeObject(player1);
+            output.writeObject(player2);
+            output.writeObject(simulator);
+
+        }
     }
 }

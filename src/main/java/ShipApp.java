@@ -9,7 +9,7 @@ public class ShipApp {
             game.gameRunner();
             System.out.println("Thank's for playing");
             System.out.println("Choose x for close and any other key for new game.");
-            String answer = scanner.nextLine();
+            String answer = scanner.nextLine().toLowerCase();
             if(answer.equals("x")){
                 end = true;
             }else {

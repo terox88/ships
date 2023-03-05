@@ -1,12 +1,15 @@
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public class Ship {
+public class Ship implements Serializable {
+    private static final long serialVersionUID = 6L;
     private String name;
     private List<String> coordinates;
     private int size;
 
+    public Ship() {}
     public Ship(String name, int size) {
         this.name = name;
         this.size = size;

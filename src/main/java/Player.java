@@ -1,12 +1,15 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class Player {
+public class Player implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String name;
     private List<Ship> shipList;
     private String[][] board;
     private GameSetter setter;
     private List<String> moveList;
 
+    public Player(){}
     public Player(String name){
         this.name = name;
         setter = new GameSetter();
